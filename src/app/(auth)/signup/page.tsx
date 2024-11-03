@@ -1,8 +1,8 @@
 import { CircleUser } from "lucide-react";
-import { SignInForm } from "./(auth)/signin/components/SignInForm";
 import Link from "next/link";
+import { SignUpForm } from "./components/SignUpForm";
 
-export default function Home() {
+export default function SignUp() {
   return (
     <div className="w-full h-full">
       <div className="w-full h-screen flex justify-center items-center">
@@ -12,15 +12,16 @@ export default function Home() {
               <CircleUser size={64} />
             </div>
             <h1 className="text-3xl font-medium text-center">
-              Welcome to your <span className="text-blue-600">To-Do App</span>
+              Let&apos;s create your{" "}
+              <span className="text-blue-600">Account</span>
             </h1>
           </div>
-          <SignInForm />
+          <SignUpForm />
           <div className="text-center">
             <p className="text-xs text-gray-400 text-center">
-              Don&apos;t have an account?{" "}
-              <Link href="/signup" className="text-blue-600">
-                Sign up
+              Already have an account?{" "}
+              <Link href="/" className="text-blue-600">
+                Sign in
               </Link>
             </p>
           </div>
