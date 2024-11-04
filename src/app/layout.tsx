@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "../components/ui/mode-toggle";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,8 @@ export default function RootLayout({
           <div className="absolute w-fit h-fit top-2 right-2">
             <ModeToggle />
           </div>
-          {children}
+          <main>{children}</main>
+          <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>
     </html>

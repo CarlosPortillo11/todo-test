@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlserver"
+  url      = "sqlserver://localhost:1433;database=todo;user=sa;password=12345678;trustServerCertificate=true"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ToDo      ToDo[]
+}
+
+model ToDo {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

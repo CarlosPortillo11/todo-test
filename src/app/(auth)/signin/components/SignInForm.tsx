@@ -8,6 +8,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FormPasswordInput } from "../../../../components/ui/form-password-input";
 import { Button } from "@/components/ui/button";
+import { signInAction } from "@/app/actions/auth/signIn";
 
 export const SignInForm = () => {
   const form = useForm<SignInValidation>({
@@ -19,8 +20,16 @@ export const SignInForm = () => {
   });
 
   const handleSubmit: () => void = form.handleSubmit(
-    (data) => {
+    async (data) => {
       console.log(data);
+      await signInAction(data);
+
+      //How to handle the response in case of error?
+
+      //Redirect the user to the dashboard
+      /* 
+        redirect("/dashboard")
+      */
     },
     (errors) => {
       console.log(errors);

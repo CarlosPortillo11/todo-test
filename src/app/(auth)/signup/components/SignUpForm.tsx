@@ -1,12 +1,15 @@
 "use client";
+import { signUpAction } from "@/app/actions/auth/signUp";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/ui/form-input";
 import { FormPasswordInput } from "@/components/ui/form-password-input";
 import { SignUpSchema, SignUpValidation } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+/* import { redirect } from "next/navigation"; */
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export const SignUpForm = () => {
   const form = useForm<SignUpValidation>({
@@ -22,9 +25,20 @@ export const SignUpForm = () => {
   const handleSubmit: () => void = form.handleSubmit(
     async (data) => {
       console.log(data);
+
+      //What should I receive?
+      await signUpAction(data);
+
+      //Redirect to dashboard/login
+      /* 
+        toast.success("User created succesfully, redirecting...")
+        redirect("/") 
+      */
     },
     (errors) => {
       console.log(errors);
+      //How can I return a most accurate error message?
+      toast.error("Error creating user");
     }
   );
 
