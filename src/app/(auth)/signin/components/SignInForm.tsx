@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FormPasswordInput } from "../../../../components/ui/form-password-input";
 import { Button } from "@/components/ui/button";
 import { signInAction } from "@/app/actions/auth/signIn";
+import { toast } from "sonner";
 
 export const SignInForm = () => {
   const form = useForm<SignInValidation>({
@@ -22,7 +23,17 @@ export const SignInForm = () => {
   const handleSubmit: () => void = form.handleSubmit(
     async (data) => {
       console.log(data);
-      await signInAction(data);
+      const response = await signInAction(data);
+
+      const toastID = toast.loading("Signing in...");
+      //Del handleServerError defininido en la instancia
+      if (response?.serverError) {
+        /* console.error(response.serverError); */
+        toast.error(response.serverError, { id: toastID });
+        return;
+      }
+
+      toast.success("Welcome back!", { id: toastID });
 
       //How to handle the response in case of error?
 

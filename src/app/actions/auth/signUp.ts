@@ -7,9 +7,10 @@ import bcrypt from "bcrypt";
 export const signUpAction = actionClient
   .schema(SignUpSchema)
   .action(async ({ parsedInput: { name, email, password } }) => {
-    //Should I use a try/catch?
+    //Should I use a try/catch? R/ No, the SafeAction handles the errors
     console.log({ name, password });
 
+    //If it doesn't return null or undefined, make it return on the catch of the promise and send the error on the falsy validation as a CustomError (cuz we're on an action)
     const userExists = await prisma.user.findUnique({
       where: {
         email,
